@@ -89,68 +89,78 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Hib_Spiel")
-public class Spiel extends Entitaet {
-    @ManyToOne
-    @JoinColumn(name = "Id", referencedColumnName = "Id", insertable = false, updatable = false)
-    private Score score;
-    @ManyToOne
-    @JoinColumn(name = "Id", referencedColumnName = "Id", insertable = false, updatable = false)
-    private Verein verein;
-    @Id
-    @Column(name = "SpielNr")
-    @GeneratedValue
-    private int nr;
-    @Column
-    private String datum;
-    @Column
-    private String zeit;
-    @OneToMany(mappedBy = "spiel", fetch = FetchType.EAGER)
-    private List<Stadion> stadion = new ArrayList<Stadion>();
+@Table(name ="Hib_Spiel")
+public class Spiel extends Entitaet{
+	@ManyToOne
+	@JoinColumn(name="Id", referencedColumnName = "Id", insertable = false, updatable=false)
+	private Score score;
+	@ManyToOne
+	@JoinColumn(name="Id", referencedColumnName = "Id", insertable = false, updatable=false)
+	private Verein verein;
+	@Id
+	@Column(name="SpielNr")
+	@GeneratedValue
+	private int nr;
+	@Column
+	private String datum;
+	@Column
+	private String zeit;
+	@OneToMany(mappedBy= "spiel", fetch=FetchType.EAGER)
+	private List<Stadion> stadion = new ArrayList<Stadion>();
+	
+	public Spiel(){
+		
+	}
 
-    public Spiel() {
+	public Spiel(int nr, String datum, String zeit, Score score, Verein verein){
+		this.nr = nr;
+		this.datum = datum;
+		this.zeit= zeit;
+		this.score = score;
+		this.verein = verein;
+	}
+	
+	public String getDatum() {
+		return datum;
+	}
 
-    }
+	public void setDatum(String date) {
+		this.datum = date;
+	}
 
-    public Spiel(int nr, String datum, String zeit, Score score, Verein verein) {
-        this.nr = nr;
-        this.datum = datum;
-        this.zeit = zeit;
-        this.score = score;
-        this.verein = verein;
-    }
+	public String getNachname() {
+		return zeit;
+	}
 
-    public String getDatum() {
-        return datum;
-    }
+	public void setZeit(String zeit) {
+		this.zeit = zeit;
+	}
 
-    public void setDatum(String date) {
-        this.datum = date;
-    }
+	public long getNr() {
+		return nr;
+	}
+	
+	public void describeSelf() {
+		System.out.println("SpielNr: "+ nr + " Datum: "+ datum + " Zeit: "+ zeit);
+	}
 
-    public String getNachname() {
-        return zeit;
-    }
-
-    public void setZeit(String zeit) {
-        this.zeit = zeit;
-    }
-
-    public long getNr() {
-        return nr;
-    }
-
-    public void describeSelf() {
-        System.out.println("SpielNr: " + nr + " Datum: " + datum + " Zeit: " + zeit);
-    }
-
-    public Spiel createInstance() {
-        Scanner scan = new Scanner(System.in);  // Create a Scanner object
-        System.out.println("Geben sie ein Datum in Form dd-MM-yyyy ein ");
-        this.datum = scan.nextLine();  // Read user input
-        System.out.println("Geben sie ein Uhr ein hh-mm");
-        this.zeit = scan.nextLine();  // Read user input
-        return this;
-
-    }
+	public Spiel createInstance(){
+	    Scanner scan = new Scanner(System.in);  // Create a Scanner object
+	    System.out.println("Geben sie ein Datum ein dd-MM-yyyy");
+	    this.datum = scan.nextLine();  // Read user input
+	    System.out.println("Geben sie ein Uhr ein hh-mm");
+	    this.zeit = scan.nextLine();  // Read user input
+		return this;
+	}
+	
+	public Spiel modifyData() {
+	    Scanner scan = new Scanner(System.in);  // Create a Scanner object
+		System.out.println("Geben sie das neue Datum ein:");
+		String ans = scan.nextLine();
+	    if(ans != "")this.datum = ans;  // Read user input
+	    System.out.println("Geben sie dei neue Zeit ein:");
+	    ans = scan.nextLine();
+	    if(ans != "")this.zeit = ans;  // Read user input
+	    return this;
+	}
 }

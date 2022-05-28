@@ -4,7 +4,8 @@
          version="2.0">
 <persistence-unit name="PersistenceUnit">
   <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-  <class>Spiel</class>
+
+    <class>Spiel</class>
 
 <class>Stadion</class>
 
@@ -33,8 +34,8 @@
       <property name = "hibernate.connection.username" value="C##FBPOOL100"/>
       <property name = "hibernate.connection.password" value="oracle"/>
       <property name="dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
-    <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
-    
+      <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
+
    </properties>
   </persistence-unit>
 </persistence>
